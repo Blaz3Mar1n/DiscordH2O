@@ -87,4 +87,4 @@ async def on_message(message) :
               EXAMPLE: talk Hello!
         
         MORE COMING SOON    ``` ''')
-client.run(str(os.environ.get('BOT_TOKEN')
+client.run(str(os.environ.get('BOT_TOKEN')))
