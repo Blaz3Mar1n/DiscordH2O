@@ -84,7 +84,7 @@ async def on_message(message) :
     if message.content.find('*help') != -1:
         await message.channel.send(''' ```Commands :
                                            
-        random- says a random kit 
+        random- says a random kit worked
         
         pewds- displays pewdiepie and tseries subcount + subgap
                   
