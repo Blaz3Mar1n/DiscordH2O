@@ -1,9 +1,18 @@
 import discord
 import random
+import time
 import requests
-import os
 from discord.ext import commands
-from discord.ext.commands import Bot
+def gmail(receiver_email,message) :
+    password = 'h2o29h2o12'
+    import smtplib, ssl
+    port = 465  # For SSL
+    smtp_server = "smtp.gmail.com"
+    sender_email = "h2odiscordbot@gmail.com"  # Enter your address
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
 def pewds():
     r = requests.get("https://bastet.socialblade.com/youtube/lookup?query=" + "UC-lHJZR3Gqxm24_Vd_AJ5Yw")
     r = r.content
@@ -81,10 +90,35 @@ async def on_message(message) :
         rep = getresponse(talk)
         print(rep)
         await message.channel.send(rep)
+    if message.content.find('*gay') != -1 :
+        st = False
+        gid = ''
+        for i in str(message.mentions) :
+            if st == True and i == ' ' :
+                break
+            if i == '=' :
+                st = True
+            elif st == True:
+                gid+=i
+        print(gid)
+        em = discord.Embed()
+        em.set_image(url=gid)
+        await message.channel.send(embed=em)
+    if message.content.find('*gmail') != -1:
+        to = ''
+        cou = 0
+        for i in sent[12:] :
+            cou+=1
+            if i != ' ' :
+                to+=i
+            else :
+                break
+        gmail(to,sent[17+cou:])
+        await message.channel.send('gmail '+ str(sent[17+cou:]) + ' sent to '+str(to))
     if message.content.find('*help') != -1:
         await message.channel.send(''' ```Commands :
                                            
-        random- says a random kit
+        random- says a random kit 
         
         pewds- displays pewdiepie and tseries subcount + subgap
                   
@@ -96,8 +130,7 @@ async def on_message(message) :
               While talking you have to be carfull about writing and watch
               out about question marks.
               
-              EXAMPLE: talk Hello!
+              EXAMPLE: *talk Hello!
         
         MORE COMING SOON    ``` ''')
 client.run('NTY4NzQyNTQzNDg3OTI2Mjcy.XLmhZQ.vFGf7eZjxdlO_k-OVXG7cOEJeIE')
-client.run(str(os.environ.get('BOT_TOKEN')))
