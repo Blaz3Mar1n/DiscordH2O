@@ -23,21 +23,14 @@ def meme():
     r = requests.get("https://some-random-api.ml/meme")
     r = r.content
     r = str(r)
+    if r[0] == 'b' :
+        r = r[1:]
+    r = r[18:]
     rl = ''
-    init = False
-    pri = ''
-    print(r)
     for i in r :
-        if i == ':' and init == False :
-            init = True
-        elif init == True and i == '"' and pri != ':' :
-            rl = rl[1:]
+        if i == '"' :
             break
-        elif init == True :
-            rl+=i
-        pri = i
-    print(rl)
-    print()
+        rl+=i
     return(rl)
 def tseries():
     r = requests.get("https://bastet.socialblade.com/youtube/lookup?query=" + "UCq-Fj5jknLsUf-MWSy4_brA")
@@ -132,5 +125,8 @@ async def on_message(message) :
               
               EXAMPLE: *talk Hello!
         
+        gmail- sends gmail to someone. Can be used for trolls.
+                Do *gmail send:EMAIL RECIEVER text:YOUR TEXT HERE
+                
         MORE COMING SOON    ``` ''')
 client.run('NTY4NzQyNTQzNDg3OTI2Mjcy.XLmhZQ.vFGf7eZjxdlO_k-OVXG7cOEJeIE')
